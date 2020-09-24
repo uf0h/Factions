@@ -1,0 +1,4 @@
+name: Factions
+version: ${project.version}
+main: me.ufo.factions.Factions
+author: ufo
