@@ -1,19 +1,22 @@
 package me.ufo.factions.api;
 
-import java.util.List;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import org.bukkit.Location;
 
-public interface Board {
+public interface Board<T extends Faction<T>> {
 
   int load();
 
-  boolean saveFaction(final Faction faction);
+  boolean saveFaction(final T faction);
 
-  boolean deleteFaction(final Faction faction);
+  boolean deleteFaction(final T faction);
 
-  Faction getFaction(final String tag);
+  T getFaction(final String tag);
 
-  Faction getFaction(final int x, final int z);
+  T getFactionAt(final int x, final int z);
 
-  List<Faction> getFactions();
+  T getFactionAt(final Location location);
+
+  Object2ObjectOpenHashMap<?, T> getFactions();
 
 }

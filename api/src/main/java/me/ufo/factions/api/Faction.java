@@ -1,11 +1,14 @@
 package me.ufo.factions.api;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.UUID;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import org.bukkit.Location;
 
-public interface Faction {
+public interface Faction<T extends Faction<T>> {
 
   UUID getUniqueId();
 
@@ -15,22 +18,22 @@ public interface Faction {
 
   Location getHome();
 
-  List<UUID> getMembers();
-
-  List<UUID> getModerators();
-
-  List<UUID> getColeaders();
+  ObjectOpenHashSet<UUID> getMembers();
 
   UUID getLeader();
 
-  List<Faction> getAlliances();
+  ObjectOpenHashSet<UUID> getAllPlayers();
 
-  List<Faction> getEnemies();
+  ObjectOpenHashSet<T> getAlliances();
+
+  ObjectOpenHashSet<T> getEnemies();
 
   Instant getLastOnline();
 
   Location getClaimAt(final int x, final int z);
 
-  List<int[]> getClaims();
+  ObjectOpenHashSet<int[]> getClaims();
+
+  Object2ObjectOpenHashMap<String, Location> getWarps();
 
 }

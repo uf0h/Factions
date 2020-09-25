@@ -1,12 +1,18 @@
 package me.ufo.factions;
 
-import java.util.List;
 import com.google.common.base.Preconditions;
-import me.ufo.factions.api.Faction;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import org.bukkit.Location;
 
-public final class Board implements me.ufo.factions.api.Board {
+public final class Board implements me.ufo.factions.api.Board<Faction> {
 
   private boolean loaded;
+  /* TODO: check other options + custom location obj, faster hashs */
+  private static final Object2ObjectOpenHashMap<Location, Faction> locations = new Object2ObjectOpenHashMap<>();
+
+  public Board() {
+    this.load();
+  }
 
   @Override
   public int load() {
@@ -23,6 +29,7 @@ public final class Board implements me.ufo.factions.api.Board {
 
   @Override
   public boolean deleteFaction(final Faction faction) {
+
     return false;
   }
 
@@ -32,13 +39,18 @@ public final class Board implements me.ufo.factions.api.Board {
   }
 
   @Override
-  public Faction getFaction(final int x, final int z) {
+  public Faction getFactionAt(final int x, final int z) {
     return null;
   }
 
   @Override
-  public List<Faction> getFactions() {
-    return null;
+  public Faction getFactionAt(final Location location) {
+    return locations.get(location);
+  }
+
+  @Override
+  public Object2ObjectOpenHashMap<Location, Faction> getFactions() {
+    return locations;
   }
 
 }
